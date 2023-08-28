@@ -1,17 +1,24 @@
 package controller
 
-// import (
-//   "github.com/gin-gonic/gin"
-//   "fmt"
+import (
+   "github.com/gin-gonic/gin"
+  "fmt"
 
-// )
+)
 
 
 
-func UserInfo(){
-  
+func UserInfo(c *gin.Context){ 
+    fmt.Println("UserInfo")
+    
 }
 
-func Register(){
-  
+func Register(c *gin.Context){
+    fmt.Println("Register")
+}
+
+
+
+func Login(c *gin.Context){
+    fmt.Println("Login")
 }

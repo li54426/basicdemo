@@ -1,7 +1,11 @@
 package main
+
 import (
-  "github.com/gin-gonic/gin"
-  "basicdemo/controller"
+	"basicdemo/controller"
+	"basicdemo/models"
+	"fmt"
+
+	"github.com/gin-gonic/gin"
 )
 
 
@@ -19,7 +23,7 @@ func initRouter(r *gin.Engine) {
   apiRouter.POST("/user/login/", controller.Login)
 
   // 上传文件
-  apiRouter.POST("publish/action/", controller.Publish)
+  apiRouter.POST("/publish/action/", controller.Publish)
   // 返回上传列表
   apiRouter.GET("/publish/list/", controller.PublishList)
   
@@ -31,10 +35,16 @@ func initRouter(r *gin.Engine) {
 
 
 func main(){
+    // init db
+     err := models.InitDB()
+    if err != nil {
+        fmt.Println("create db fail")
+        return
+    }
 
-  // 创建一个 有 log 和rec 的服务器
-  r:= gin.Default()
-  initRouter(r)
-  r.run()
-  
+    // 创建一个 有 log 和rec 的服务器
+    r:= gin.Default()
+    initRouter(r)
+    r.Run()
+
 }

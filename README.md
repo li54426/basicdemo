@@ -2,6 +2,9 @@
 
 使用go语言来一个后端
 
+## 本项目已经停止更新, 转为更新另一个项目 [简易抖音后台](https://github.com/li54426/simple-douyin)
+
+
 
 
 #### 项目目录结构
@@ -58,6 +61,13 @@
 #### 1.1 go用户字段
 ```go
 
+type User struct{
+  Id int64 `json:"id, omitempty"`
+  Name string `json:"name, omitempty"`
+  
+}
+
+
 
 
 ```
@@ -66,10 +76,52 @@
 
 #### 1.2 go文件字段
 
+```go
+type File struct {
+  Id int64 `json:"id, omitempty"`
+  Author User `json:"author"`
+  PlayUrl string `json:"paly_url" json:"play_url, omitempty"`
+}
+```
 
 
 
 
+#### 1.3 传输信息
+- 当进行注册/登录时传输的是`username + password`, 
+- 登录后就是传输的`token`
+
+
+
+
+
+
+
+### model
+```go
+ UserDaoInstance()
+ func (*UserDao) CreateUser(user *User) (int64, error)
+ func (*UserDao) FindUserByName(username string)(*User, error)
+```
+
+
+
+
+### controller
+
+
+#### Register
+
+
+
+
+#### userInfo
+```go
+https://xxxxx/main/user?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJsaXF3ZXR0IiwiZXhwIjoxNjkzMjk1MDY3LCJpYXQiOjE2OTMyMDg2NjgsImlzcyI6ImRlbW8iLCJuYmYiOjE2OTMyMDg2Njh9.GWPbzwiNBsCuAeE_dbn21xjAlGpK7Xh683F4-X1NPJc
+
+// 回复
+{"status_code":1,"status_msg":"User dont exist","User":{"id":0,"name":""}}
+```
 
 
 
